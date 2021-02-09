@@ -1,0 +1,58 @@
+//Method 1
+class Solution {
+    public void duplicateZeros(int[] arr) {
+        int zero = 0;
+        int arrLength = arr.length-1;
+        
+        for(int i=0; i<=arrLength-zero; i++){
+            if(arr[i] == 0){
+                if(i == arrLength-zero){
+                    arr[arrLength] = 0;
+                    arrLength -= 1;
+                    break;
+                }
+                zero++;
+            }
+        }
+        
+        int last = arrLength-zero;
+        
+        for(int i=last; i>=0; i--){
+            if(arr[i]==0){
+                arr[i + zero] = 0;
+                zero--;
+                arr[i + zero] = 0;
+            }
+            else{
+                arr[i + zero] = arr[i];
+            }
+        }
+    }
+}
+
+//Method 2
+class DuplicateZeroesSolution {
+    public void duplicateZeros(int[] arr) {
+        int zeroes = 0;
+        for (int i: arr) {
+            if (i == 0) {
+                zeroes++;
+            }
+        }
+        int i = arr.length - 1, j = arr.length + zeroes - 1;
+        
+        while (i != j) {
+            insert(arr, i, j--);
+            if (arr[i] == 0) {
+                insert(arr, i, j--);
+            }
+            i--;
+        }
+    }
+    
+    private void insert(int[] arr, int i, int j) {
+        if (j < arr.length) {
+            arr[j] = arr[i];
+        }
+    }
+}
