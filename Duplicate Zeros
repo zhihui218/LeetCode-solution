@@ -6,9 +6,9 @@ class Solution {
         
         for(int i=0; i<=arrLength-zero; i++){
             if(arr[i] == 0){
-                if(i == arrLength-zero){
-                    arr[arrLength] = 0;
-                    arrLength -= 1;
+                if(i == arrLength-zero){ //last index = 0
+                    arr[arrLength] = 0;  //last element = 0
+                    arrLength -= 1;      //length -1 because 0 in last index is not duplicate
                     break;
                 }
                 zero++;
@@ -39,7 +39,8 @@ class DuplicateZeroesSolution {
                 zeroes++;
             }
         }
-        int i = arr.length - 1, j = arr.length + zeroes - 1;
+        int i = arr.length - 1
+        int j = arr.length + zeroes - 1;
         
         while (i != j) {
             insert(arr, i, j--);
