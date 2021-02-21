@@ -1,0 +1,87 @@
+Method 1 (case which the mountain must at least start in an increasing manner)
+class Solution {
+    public boolean validMountainArray(int[] arr) {
+        
+       if(arr == null || arr.length < 3) return false;
+        
+       boolean increasing = arr[1] > arr[0];
+        
+       if(!increasing){
+           return false;  // the mountain must at least start in an increasing manner
+       } 
+       
+       for(int i=1; i<arr.length; i++){
+           if(arr[i] == arr[i-1]){
+               return false; //plateaus are prohibited
+           }
+           if(increasing){
+               if(arr[i] < arr[i-1]){
+                   return false; //we reached the peak
+               }
+               else{
+                   if(arr[i] > arr[i-1]){
+                       return false; // every element must be decreasing, otherwise return false
+                   }
+               }
+           } 
+       }
+    
+        // we can't just return true, we must ensure that a peak was reached at some point.
+       return !increasing;
+    }
+}
+
+Method 2
+class Solution {
+    public boolean validMountainArray(int[] A) {
+        
+       int N = A.length;
+       int i = 0;
+
+        if(A == null || A.length < 3) return false;
+        
+        // walk up
+        while (i+1 < N && A[i] < A[i+1])
+            i++;
+
+        // peak can't be first or last
+        if (i == 0 || i == N-1)
+            return false;
+
+        // walk down
+        while (i+1 < N && A[i] > A[i+1])
+            i++;
+
+        return i == N-1;
+        
+    }
+}
+
+Method 3
+class Solution {
+    public boolean validMountainArray(int[] A) {
+        
+       int i=0;
+        
+        //use 2 pointers : i & i+1
+        //increasing
+        while(i < A.length && i+1 < A.length && A[i] < A[i+1] ){
+            i++ ;
+        }
+        
+        //if not increasing or no decreasing
+        if(i == 0 || i+1 >= A.length){
+            return false;
+        }
+        
+        //decreasing
+        while(i < A.length && i+1 < A.length){
+            if(A[i] <= A[i++ +1]){ //if plateaus occur and not decreasing return false
+                return false;
+            }
+        }
+        
+        //if all conditions above pass through successful
+        return true;
+    }
+}
