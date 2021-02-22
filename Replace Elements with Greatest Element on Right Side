@@ -1,0 +1,21 @@
+class Solution {
+    public int[] replaceElements(int[] arr) {
+        
+        //check for edge cases
+        if(arr == null) return arr;
+      
+        int length = arr.length-1;
+        int max = arr[length]; //let max be the last element
+        arr[length] = -1; //last index always -1
+        
+        //start from second last index
+        for(int i=length-1 ; i>=0; i--){
+            int temp = arr[i]; //sort the current element (need later for updating the next greatest element)
+            arr[i] = max;      //replace current element with the next greatest
+            if(temp > max){    //update the greatest element
+                max = temp;
+            }
+        }
+        return arr;
+    }
+}
