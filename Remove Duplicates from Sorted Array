@@ -1,3 +1,4 @@
+Method 1 (return type is int) 
 class Solution {
     public int removeDuplicates(int[] nums) {
     
@@ -19,5 +20,35 @@ class Solution {
             }
         }
         return i+1;
+    }
+}
+
+Method 2 (return type is int[])
+class Solution {
+    public int[] removeDuplicates(int[] nums) {
+        
+        //check for edge cases
+        if(nums == null) return nums;
+        
+        //count the unique elements in input array
+        int uniqueNum = 0;
+        for(int i=0; i<nums.length; i++){
+            // An element should be counted as unique if it's the first
+            // element in the Array, or is different to the one before it.
+            if(i==0 || nums[i] != nums[i-1]){
+                uniqueNum++;
+            }
+        }
+        
+        //declare and initialise new result array size
+        int [] resultArr = new int [uniqueNum];
+        
+        int index = 0;
+        for(int i=1; i<nums.length; i++){
+            while(nums[i] != nums[i-1]){
+                resultArr[index] = nums[i];
+            }
+        }
+        return resultArr;
     }
 }
